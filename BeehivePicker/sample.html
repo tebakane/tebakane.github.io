@@ -1,8 +1,21 @@
 <html>
 <head>
-<script src="/BeehivePicker/beehive_picker.js"></script>
+<!--<script src="/BeehivePicker/beehive_picker.js"></script>-->
+<style>
+#view-color{
+  width: 200px;
+  height: 100px;
+}
+</style>
+<script src="./beehive_picker.js"></script>
 <script>
 window.onload = function(){
+  function shouldBeWhite(ele){
+    var style = window.getComputedStyle(ele, null);
+    var color = style.backgroundColor;
+    var rgb = color.match(/[0-9]+/g).map(function(n){ return Number(n); });
+    return rgb[0] + rgb[1] + rgb[2] < 255 * 3 / 2 ? true : false;
+  }
   var div = document.getElementById('main');
   Beehive.Picker(div);
   div.addEventListener('click', function(e){
@@ -10,6 +23,7 @@ window.onload = function(){
     if(!color){ return; }
     var view = document.getElementById('view-color');
     view.style.backgroundColor = color;
+    view.style.color = shouldBeWhite(e.target) ? '#ffffff' : '#000000';
     view.innerHTML = color;
   });
 }
