@@ -1,0 +1,24 @@
+<html>
+<head>
+<script src="/BeehivePicker/beehive_picker.js"></script>
+<script>
+window.onload = function(){
+  var div = document.getElementById('main');
+  Beehive.Picker(div);
+  div.addEventListener('click', function(e){
+    var color = Beehive.getColorCode(e.target);
+    if(!color){ return; }
+    var view = document.getElementById('view-color');
+    view.style.backgroundColor = color;
+    view.innerHTML = color;
+  });
+}
+</script>
+</head>
+<body>
+<div class="hello" id="main"></div>
+<div id="view-color"></div>
+</body>
+</html>
+
+
