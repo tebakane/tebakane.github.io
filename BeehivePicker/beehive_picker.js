@@ -31,7 +31,7 @@ var Beehive = {};
     var parentElement = element.parentElement;
     var beehiveID = parentElement.getAttribute('beehive-id');
     var style = window.getComputedStyle(e.target, null);
-    if(!style.backgroundColor.match(/^rgb/)){ return; }
+    if(!e.target.className.match(/(?:^|\s)beehive-picker(?:\s|$)/)){ return; }
     var rgb = style.backgroundColor.match(/[0-9]+/g).map(function(n){ return Number(n); });
     var centerColor = style.backgroundColor;
     if((rgb[0] === 255 && rgb[1] === 255 && rgb[2] === 255) || (rgb[0] === 0 && rgb[1] === 0 && rgb[2] === 0)){ 
@@ -111,7 +111,7 @@ var Beehive = {};
   Beehive.getColorCode = function(element){
     var style = window.getComputedStyle(element, null);
     var rgb = style.backgroundColor
-    if(!rgb.match(/^rgb/)){ return null; }
+    if(!element.className.match(/(?:^|\s)beehive-picker(?:\s|$)/)){ return null; }
     var ret = eval(rgb.replace(/rgb/,"((").replace(/,/ig,")*256+")).toString(16);
     return "#" + (("000000" + ret).substring( 6 + ret.length - 6));
   };
@@ -124,7 +124,7 @@ document.addEventListener( 'DOMContentLoaded', function(){
   var style = '';
   style += '.beehive-picker-main{ height: 200px; } ';
   style += '.beehive-pickers{ height: 177px; } ';
-  style += '.beehive-picker { position: relative; width: 14px; height: 8.08px; margin: 2.02px 0; float: left; } ';
+  style += '.beehive-picker { position: relative; width: 14px; height: 8.08px; margin: 2.0px 0; float: left; } ';
   style += '.beehive-picker:before,.beehive-picker:after { content: ""; position: absolute; width: 0; border-left: 7px solid transparent; border-right: 7px solid transparent; } ';
   style += '.beehive-picker.beehive-picker-next { clear: both; } .beehive-picker.beehive-picker1 { left: 42px; } ';
   style += '.beehive-picker.beehive-picker2 { left: 35px; } ';
